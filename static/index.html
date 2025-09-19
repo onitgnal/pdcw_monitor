@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>PDCW Monitor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/static/styles.css"/>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" defer></script>
+  <script defer src="/static/main.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">PDCW Monitor</div>
+      <div class="controls">
+        <label class="ctrl">
+          Window:
+          <input id="win-mins" type="number" min="0.5" step="0.5" value="5"> min
+        </label>
+        <button id="clear-btn" class="btn">Clear</button>
+        <span id="status" class="status">connecting…</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <aside class="left">
+        <div class="panel">
+          <div class="panel-header">
+            <div>Channels</div>
+            <div class="panel-actions">
+              <button id="select-all" class="btn btn-small">All</button>
+              <button id="select-none" class="btn btn-small">None</button>
+            </div>
+          </div>
+          <div id="channel-list" class="channel-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">Live Values</div>
+          <div id="live-values" class="live-values"></div>
+        </div>
+      </aside>
+
+      <main class="right">
+        <div id="chart" class="chart"></div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
