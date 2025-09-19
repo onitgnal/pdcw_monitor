@@ -1,3 +1,24 @@
-# pixi environments
-.pixi/*
-!.pixi/config.toml
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.cache/
+.venv/
+.ruff_cache/
+
+# Pixi
+.pixi/
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs & data
+logs/
+data/*.parquet
+
+# OS
+.DS_Store
+Thumbs.db

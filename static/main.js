@@ -92,7 +92,7 @@ selectNoneBtn.addEventListener('click', () => {
   buildChannelList();
 });
 
-// ✅ FIX: clear by deleting all traces and resetting our set.
+// FIX: clear by deleting all traces and resetting our set.
 // Next incoming data tick will re-add traces for checked channels.
 clearBtn.addEventListener('click', () => {
   const n = chartDiv.data.length;

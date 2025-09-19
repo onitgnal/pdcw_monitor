@@ -12,8 +12,14 @@ uvicorn  = "0.30.*"
 pyftdi   = ">=0.55.4,<0.56"
 pyserial = ">=3.5,<4"
 pyusb    = ">=1.3.1,<2"
-pyarrow  = ">=15,<18"   # for Parquet logging
+pyarrow  = ">=15,<18"
+ruff     = ">=0.6,<0.7"
+pre-commit = ">=3.7,<4"
 
 [tasks]
 web = "python app.py"
 dev = "python -m uvicorn app:app --host 0.0.0.0 --port 5001 --reload"
+fmt = "python -m ruff format ."
+lint = "python -m ruff check ."
+hooks-install = "pre-commit install"
+hooks-run = "pre-commit run --all-files"
