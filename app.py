@@ -370,6 +370,32 @@ async def _broadcaster():
             logger.handle(msg)
 
 
+from typing import List
+from fastapi import Query
+from history import query_history
+
+@app.get("/history", response_class=HTMLResponse)
+async def history_page():
+    return FileResponse(STATIC_DIR / "history.html")
+
+
+@app.get("/api/channels")
+async def get_channels():
+    return CHANNELS
+
+
+@app.get("/api/history")
+async def get_history(
+    start: str,
+    end: str,
+    limit: int = 1000,
+    channels: str = Query(...),
+):
+    channel_list = channels.split(',')
+    data = query_history(start, end, channel_list, limit)
+    return data
+
+
 @app.websocket("/ws")
 async def ws_endpoint(ws: WebSocket):
     await hub.add(ws)

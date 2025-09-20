@@ -1,0 +1,53 @@
+/app/app.py:347: DeprecationWarning:
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+
+  @app.on_event("startup")
+/app/app.py:357: DeprecationWarning:
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+
+  @app.on_event("shutdown")
+INFO:     Started server process [3746]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5001 (Press CTRL+C to quit)
+Exception in thread PDCW-Reader:
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/serialext/protocol_ftdi.py", line 36, in open
+    device = Ftdi.create_from_url(self.port)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/ftdi.py", line 354, in create_from_url
+    device.open_from_url(url)
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/ftdi.py", line 487, in open_from_url
+    devdesc, interface = self.get_identifiers(url)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/ftdi.py", line 389, in get_identifiers
+    return UsbTools.parse_url(url,
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/usbtools.py", line 299, in parse_url
+    candidates, idx = cls.enumerate_candidates(urlparts, vdict, pdict,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/usbtools.py", line 407, in enumerate_candidates
+    raise UsbToolsError(f'No USB device with S/N {sernum}')
+pyftdi.usbtools.UsbToolsError: No USB device with S/N FTA1BSZM
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "/app/app.py", line 170, in _run
+    with serial_for_url(
+         ^^^^^^^^^^^^^^^
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/serial/__init__.py", line 90, in serial_for_url
+    instance.open()
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/pyftdi/serialext/protocol_ftdi.py", line 38, in open
+    raise SerialException(f'Unable to open USB port {self.portstr}: '
+serial.serialutil.SerialException: Unable to open USB port ftdi://ftdi:232:FTA1BSZM/1: No USB device with S/N FTA1BSZM

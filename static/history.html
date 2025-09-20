@@ -2,29 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>PDCW Monitor</title>
+  <title>PDCW History</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="/static/styles.css"/>
   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" defer></script>
-  <script defer src="/static/main.js"></script>
+  <script defer src="/static/history.js"></script>
 </head>
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand">PDCW Monitor</div>
+      <div class="brand">PDCW History</div>
       <div class="controls">
-        <label class="ctrl">
-          Window:
-          <input id="win-mins" type="number" min="0.5" step="0.5" value="5"> min
-        </label>
-        <button id="clear-btn" class="btn">Clear</button>
-        <a href="/history" target="_blank" class="btn">History</a>
-        <span id="status" class="status">connecting…</span>
+        <a href="/" class="btn">Live View</a>
       </div>
     </header>
 
     <div class="content">
       <aside class="left">
+        <div class="panel">
+          <div class="panel-header">Controls</div>
+          <div class="history-controls">
+            <label>Start: <input type="datetime-local" id="start-time"></label>
+            <label>End: <input type="datetime-local" id="end-time"></label>
+            <label>Max Points: <input type="number" id="limit" value="1000" min="100"></label>
+            <button id="plot-btn" class="btn">Plot</button>
+          </div>
+        </div>
         <div class="panel">
           <div class="panel-header">
             <div>Channels</div>
@@ -35,14 +38,14 @@
           </div>
           <div id="channel-list" class="channel-list"></div>
         </div>
-        <div class="panel">
-          <div class="panel-header">Live Values</div>
-          <div id="live-values" class="live-values"></div>
-        </div>
       </aside>
 
       <main class="right">
         <div id="chart" class="chart"></div>
+        <div class="chart-actions">
+            <button id="save-csv-btn" class="btn">Save as CSV</button>
+            <button id="save-plot-btn" class="btn">Save as Plot</button>
+        </div>
       </main>
     </div>
   </div>
