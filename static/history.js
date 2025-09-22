@@ -85,6 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       plottedData = data; // Save for export
 
+      if (!data.rows || data.rows.length === 0) {
+        chartDiv.innerHTML = '<div class="empty">No data for selected range.</div>';
+        return;
+      }
+
       const traces = data.columns.slice(1).map((name, i) => ({
         x: data.rows.map(r => new Date(r[0])),
         y: data.rows.map(r => r[i + 1]),

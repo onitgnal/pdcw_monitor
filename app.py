@@ -286,6 +286,10 @@ class ParquetLogger:
         if len(self._buf) >= self.flush_every:
             self._flush()
 
+    def flush(self):
+        """Expose a manual flush so query endpoints can force writing buffered rows."""
+        self._flush()
+
     def close(self):
         try:
             self._flush()
@@ -391,6 +395,12 @@ async def get_history(
     limit: int = 1000,
     channels: str = Query(...),
 ):
+    # Flush buffered samples so they are visible in history queries
+    if logger:
+        try:
+            logger.flush()
+        except Exception:
+            pass
     channel_list = channels.split(',')
     data = query_history(start, end, channel_list, limit)
     return data
